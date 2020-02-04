@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Weather Dashboard</title>
+
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./Assets/style.css">
+        <!--fontawesome-->
+        <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" data-auto-replace-svg="nest"></script>
+        <link href="https://fonts.googleapis.com/css?family=Alatsi&display=swap" rel="stylesheet">
+
+
+    </head>
+    <body>
+         <!--header-->
+
+        <nav class="navbar navbar-dark bg-dark justify-content-center">
+            <h1>Weather Dashboard</h1>
+          </nav>
+
+        <!-- <div class="container"> -->
+            <div class="row" id="contentContainer">
+                
+                <div class ="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>Search for a City:</h3>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="citySearch">                            
+                                    <button type="submit" class="btn btn-default"id="searchBtn"><i class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+                            <ul class="list-group">
+                                <!-- <li class="list-group-item active">Cras justo odio</li> -->
+                                <li class="list-group-item">Atlanta</li>
+                                <li class="list-group-item">Apex</li>
+                                <li class="list-group-item">New York City</li>
+                                <li class="list-group-item">Berlin</li>
+                                <li class="list-group-item">Madird</li>
+                                <li class="list-group-item">Stockholm</li>
+                                <li class="list-group-item">Munich</li>
+                                <li class="list-group-item">Chicago</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title" id="cityName">Atlanta</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="temp">Temperature (F):</p>
+                                    <p class="humidity">Humidity:</p>
+                                    <p class="wind">Wind speed:</p>
+                                    <p class="UV">UV Index:</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title" id="forecast">5-Day Forecast:</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="card-deck">
+                                        <div class="card">
+                                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                                        <div class="card-body">
+                                            <h5 class="card-title" id="date1">Date</h5>
+                                            <img src="#" alt="#" id="icon1">
+                                            <p class="card-text">Temp: xxxx</p>
+                                            <p class="card-text">Humidity: xxxx</p>
+                                        </div>
+                                        </div>
+                                        <div class="card">
+                                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                                        <div class="card-body">
+                                            <h5 class="card-title"id="date2">Date</h5>
+                                            <img src="#" alt="#" id="icon1">
+                                            <p class="card-text">Temp: xxxx</p>
+                                            <p class="card-text">Humidity: xxxx</p>
+                                        </div>
+                                        </div>
+                                        <div class="card">
+                                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                                        <div class="card-body">
+                                            <h5 class="card-title"id="date3">Date</h5>
+                                            <img src="#" alt="#" id="icon1">
+                                            <p class="card-text">Temp: xxxx</p>
+                                            <p class="card-text">Humidity: xxxx</p>
+                                        </div>
+                                        </div>
+                                        <div class="card">
+                                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                                            <div class="card-body">
+                                            <h5 class="card-title"id="date4">Date</h5>
+                                            <img src="#" alt="#" id="icon1">
+                                            <p class="card-text">Temp: xxxx</p>
+                                            <p class="card-text">Humidity: xxxx</p>
+                                        </div>
+                                        </div>
+                                        <div class="card">
+                                            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                                            <div class="card-body">
+                                            <h5 class="card-title"id="date5">Date</h5>
+                                            <img src="#" alt="#" id="icon1">
+                                            <p class="card-text">Temp: xxxx</p>
+                                            <p class="card-text">Humidity: xxxx</p>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            
+
+
+
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="./Assets/lib/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./Assets/script.js"></script>
+
+    </body>
+</html>
