@@ -39,4 +39,4 @@ The Geolocation API is used to add the user's current location to the initial la
 
 
 <img>
-<a href ="https://steffield.github.io/WeatherApp/>
+<a href ="https://steffield.github.io/WeatherApp/>Weather Application</a>
