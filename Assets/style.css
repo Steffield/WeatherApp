@@ -3,16 +3,37 @@
     font-family: 'Alatsi', sans-serif;
     /* background-color: #EEE2DC; */
 }
+img {
+    width: 2em;
+    height: 2em;
+}
 button{
     background-color: #368cbf ;
     margin: 10px;
+}
+.card-body{
+    font-size: small;
+    padding:0.5rem;
 }
 
 p{
     padding:5px;
     padding-left:10px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
 }
-    
+
+h2{
+    margin-bottom: 10px;
+}
+
+#searchHeader{
+    padding-left:0;
+}
+
+#forecast{
+    margin-top:5px;
+} 
     
 nav{
     color: #eaeaea;
@@ -26,15 +47,35 @@ h1{
     justify-content: center;
 }
 
+.list-group-item{
+    font-size: 1em;
+}
+
+.form-group{
+    padding-bottom: 20px;
+}
+
+#left-panel{
+    background-color: #eaeaea;
+    padding: 20px;
+
+}
+/* .col-lg-4{
+   padding-right: 0;
+} */
+
 .panel{
     border: 1px #33363b solid;
     text-align: left;
-    background-color: #eaeaea;
     margin: 4px;
     justify-content: left;
     padding: 10px;
     border-radius:5px;
 
+}
+
+.panel-title{
+    margin-top:auto;
 }
 
 .card{
@@ -43,10 +84,7 @@ h1{
 }
 
 .card-deck{
-    /* margin:20px 5px 5px 5px; */
-}
-.panel-title{
-    margin: 15px;
+    margin:20px 0px 5px 0px;
 }
 
 .btn{
