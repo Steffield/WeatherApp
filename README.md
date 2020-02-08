@@ -38,5 +38,5 @@ This is a weather dashboard application with search functionality to find curren
 The Geolocation API is used to add the user's current location to the initial landing page.
 
 
-<img>
+<img src="./Assets/weatherapp.png">
 <a href ="https://steffield.github.io/WeatherApp/">Weather Application</a>

@@ -2,6 +2,16 @@
     box-sizing: border-box;
     font-family: 'Alatsi', sans-serif;
     /* background-color: #EEE2DC; */
+
+}
+.navbar{
+    padding: 15px;
+    color:#f5f5f5;
+    box-shadow: 1px 1px 3px 4px #A09AA4;
+
+}
+body{
+    background-color: #f5f5f5;
 }
 img {
     width: 2em;
@@ -12,7 +22,7 @@ button{
     margin: 10px;
 }
 .card-body{
-    font-size: small;
+    font-size: medium;
     padding:0.5rem;
 }
 
@@ -56,27 +66,48 @@ h1{
 }
 
 #left-panel{
-    background-color: #eaeaea;
+    background-color:f5f5f5;
+    /* #b2beb5 */
+
     padding: 20px;
 
 }
-/* .col-lg-4{
-   padding-right: 0;
-} */
+
+#upperRightPanel{
+    background-color:#D7DDE0;
+        /* #E9DAD6; */
+     /* #e2e5de; */
+    font-size: 1.2em;
+    box-shadow: 1px 1px 3px 4px #A09AA4;
+
+}
+
+#lowerRightPanel{
+    background-color:#e0e0e0;
+    box-shadow: 1px 1px 3px 4px #A09AA4;
+
+}
+
 
 .panel{
-    border: 1px #33363b solid;
+    /* border: 1px #33363b solid; */
     text-align: left;
-    margin: 4px;
+    margin: 15px;
     justify-content: left;
     padding: 10px;
     border-radius:5px;
+    /* box-shadow: 1px 1px 3px 4px #93747C; */
 
 }
 
 .panel-title{
     margin-top:auto;
 }
+
+.list-group{
+    font-size: 1.2em;
+}
+
 
 .card{
     background-color: #368cbf ;;
@@ -91,19 +122,10 @@ h1{
     background: #368cbf ;
 }
 
-.list-group-item:active{
-    background: #368cbf ;
+
+.list-group-item:hover{
+    background-color: #A09AA4;
+    color: #fff;
+
 }
 
-/* .col-lg-4{
-    padding-right: 0;
-}
-
-.col-lg-8{
-    padding-left:5px;
-} */
-
-
-
-/* #contentContainer{
-} */
