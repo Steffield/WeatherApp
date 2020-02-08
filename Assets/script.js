@@ -1,55 +1,83 @@
+//To Do:
+//only [0] is called from local storage array although it's a for loop
+//click on li runs the query with that city name again
+//UV is red in example but I cant find info in API that marks a certain UV value
+
 $(document).ready(function() {
     //===============================================================
     //Setup variables
     //===============================================================
     //dates
     var currentDateEl = moment().format("MM/DD/YY"); 
-
     var tomorrow  = moment().add(1, "days").format("MM/DD/YY");
     var plus2days = moment().add(2, "days").format("MM/DD/YY");
     var plus3days = moment().add(3, "days").format("MM/DD/YY");
     var plus4days = moment().add(4, "days").format("MM/DD/YY");
     var plus5days = moment().add(5, "days").format("MM/DD/YY");
 
-    console.log(currentDateEl);
-    console.log(tomorrow);
-    console.log(plus2days);
-    console.log(plus3days);
-    console.log(plus4days);
-    console.log(plus5days);
-
-    $("#date1").text(tomorrow);
-    $("#date2").text(plus2days);
-    $("#date3").text(plus3days);
-    $("#date4").text(plus4days);
-    $("#date5").text(plus5days);
-
     //variables for URLS
     var APIKey = "fc5087353660b1e52ab9e8b5bc5a76a6";
-    var queryBaseURL= "https://api.openweathermap.org/data/2.5/weather";
-    var forecastQueryBaseURL= "https://api.openweathermap.org/data/2.5/forecast";
-            //UV API
-            //http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon}
-            
-            
-    var searchTerm=0;
+    var queryBaseURL= "https://api.openweathermap.org/data/2.5/";
+    var forecastQueryBaseURL= queryBaseURL + "forecast";
+    var UVQueryBaseURL= queryBaseURL +"uvi?appid="+APIKey;
+
+    //var for entered city to search for
+    var latitude;
+    var longitude;
+
+    // city search array for local storage
+    var searchedCitiesArr = []; 
+   
     var defaultCity="Raleigh";
-    var defaultURL = queryBaseURL + "?q="+defaultCity+ "&APPID=" + APIKey;
+    var defaultURL = queryBaseURL + "weather" + "?q="+defaultCity+ "&APPID=" + APIKey;
             
     //===============================================================
     //Functions
-    //===============================================================
-    //start page with Raleigh as default city
-    defaultQuery(defaultURL);
-    
-    function defaultQuery(queryURL){
-        $.ajax({
-            url: queryURL,
+    //===============================================================   
+    function init(){
+        currentLocationQuery();  
+
+    }
+
+    //function to get current location
+    function currentLocationQuery(){
+        console.log("currentLoc function runs");
+        if (!navigator.geolocation) {
+            $("#cityName").show();
+            $("#cityName").append($("<p>").html("Your browser doesn't support geolocation!"));
+        }
+        else {
+            navigator.geolocation.getCurrentPosition(success,error);
+        }
+
+        function success(position){
+            $("#cityName").show();
+            latitude  = position.coords.latitude;
+            longitude = position.coords.longitude;
+            locationAnswer(latitude,longitude);
+        }
+        //only if there is an error
+        function error() {
+            $("#cityName").show();
+            $("#cityName").append($("<p>").html("Location can't be retrieved. Raleigh will be picked as your default location."));
+            defaultQuery(defaultURL);;
+        }
+    }
+
+
+    //function to output current location 
+    function locationAnswer(latitude,longitude){
+            console.log("locationAnswer fct runs")
+           var locationQueryURL = queryBaseURL + "weather"+ "?lat=" + latitude + "&lon=" +longitude + "&APPID=" + APIKey;
+            console.log(locationQueryURL);
+           $.ajax({
+            url: locationQueryURL,
             method: "GET"
-            }).then(function(response) {             
-            // Transfer content to HTML
-            // icon variable
-            console.log(response);
+            })
+        .then(function(response){
+            console.log(response.name);
+            console.log(response.sys.country);
+
             var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
             //header with Cityname, date and icon
             $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
@@ -61,28 +89,44 @@ $(document).ready(function() {
             $(".temp").text("Temperature: "+ Number(fahrenheit).toFixed(1) +"°F");
            
             //5day forecast for default city
-            var newForecastURL = forecastQueryBaseURL +"?q=" +defaultCity  + "&APPID=" + APIKey;
+            var newForecastURL = forecastQueryBaseURL +"?q=" + response.name  + "&APPID=" + APIKey;
             console.log(newForecastURL);
             forecastQuery(newForecastURL);
+            
+            forecastDays();
+            uvIndexQuery(latitude, longitude);
+        }); 
+    }
 
-                
-            });
-                       
-    };
+    //forecast Query that populates the dates
+    function forecastDays (){
+        console.log("forecastDays fct runs");
+
+        $("#date1").text(tomorrow);
+        $("#date2").text(plus2days);
+        $("#date3").text(plus3days);
+        $("#date4").text(plus4days);
+        $("#date5").text(plus5days);
+    }
     
     //query that runs after city is enetered in search
     function runQuery(queryURL){
+        console.log("runQuery function runs");
+
         $.ajax({
         url: queryURL,
         method: "GET"
-        }).then(function(response) {             // We store all of the retrieved data inside of an object called "response"
+        }).then(function(response) {             
             
         // Log the queryURL
         console.log(queryURL);
         // Log the resulting object
         console.log(response);
+        latitude  = response.coord.lat;
+        longitude = response.coord.lon;
             
         // Transfer content to HTML
+
         // icon variable
         var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
         //header with Cityname, date and icon
@@ -100,7 +144,10 @@ $(document).ready(function() {
         console.log("Wind Speed: " + response.wind.speed);
         console.log("Humidity: " + response.main.humidity);
         console.log("Temperature (F): " + response.main.temp);
-    
+        
+        forecastDays();
+        forecastQuery();
+        uvIndexQuery(latitude, longitude);
             
         });
                    
@@ -157,24 +204,90 @@ $(document).ready(function() {
             $(".temp5").text("Temp.: "+ Number(fahrenheit).toFixed(1) +" °F");
             $(".humid5").text("Humid.: "+ response.list[38].main.humidity +" %");
             
-           
-
         });
-                
-
     }
+
+    //UV Index function
+    function uvIndexQuery(latitude, longitude){
+        var UVQueryURL =UVQueryBaseURL +"&lat="+latitude +"&lon="+longitude;
+        console.log(UVQueryURL);
+
+        $.ajax({
+            url: UVQueryURL,
+            method: "GET"
+            })
+        .then(function(response){
+            
+            $(".UV").text("UV Index: " +response.value);
+          
+        }); 
+    }
+
+    //start page with Raleigh as default city in case geolocation doesnt work  
+    function defaultQuery(queryURL){
+        
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+            }).then(function(response) {             
+           
+            var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
+            //header with Cityname, date and icon
+            $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
+            $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+            $(".humidity").text("Humidity: " + response.main.humidity+"%");
+                
+            // Converts the temp from Kelvin to Fahrenheit with the below formula
+            var fahrenheit = (response.main.temp -273.15) *1.8 +32;
+            $(".temp").text("Temperature: "+ Number(fahrenheit).toFixed(1) +"°F");
+           
+            //5day forecast for default city
+            var newForecastURL = forecastQueryBaseURL +"?q=" +defaultCity  + "&APPID=" + APIKey;
+            console.log(newForecastURL);
+            forecastQuery(newForecastURL);
+            
+            forecastDays();
+                
+            });
+                       
+    };
     
     //===============================================================
     //Main Process
     //===============================================================
-            
+    init();
+
+    //render city Queries from local storage
+
+    
+    
+    //city list from local storage 
+    if(localStorage["searchedCitiesArr"]){
+    searchedCitiesArr = JSON.parse(localStorage["searchedCitiesArr"]);
+    //if local storage not empty get cities from the searchedCitiesArr array
+    // if(searchedCitiesArr.length!="null"){
+        console.log(searchedCitiesArr.length);
+        for(var i=0; i<searchedCitiesArr.length; i++){
+            var cityLI= $("#cityList").html("<li class='list-group-item'>"+searchedCitiesArr[i]+"</li>");
+            cityLI.attr("id", "city-"+searchedCitiesArr[i]);
+            $("cityList").append(cityLI);
+        } 
+        
+    } else{
+        console.log("City Array is empty");
+    };
+
+    
+    //event handlers
+     
+     //searchButton starts new city query and output and adds city to local storage array      
     $("#searchBtn").on("click", function(){
         console.log("btn clicked");
         var cityQuery = $("#citySearch").val().trim();
         console.log(cityQuery);
             
             
-        var newURL = queryBaseURL + "?q=" + cityQuery + "&APPID=" + APIKey;
+        var newURL = queryBaseURL + "weather"+ "?q=" + cityQuery + "&APPID=" + APIKey;
         console.log(newURL);
         //send the AJAX call the newly assembled URL
         runQuery(newURL);
@@ -183,20 +296,58 @@ $(document).ready(function() {
         console.log(newForecastURL);
         forecastQuery(newForecastURL);
         
+        //add to local storage array
+        var city = $("#citySearch").val().trim().toLowerCase();
+        if (city === ""){
+            return;
+        }
+
+        city = city.split(" ");
+        searchCity = "";
+        
+        //Capitalizing the first letters of cities' each word
+        city.forEach(element => {
+            searchCity +=   " " + element.charAt(0).toUpperCase() + element.slice(1);
+        });
+        
+        //prevents to add an already existing citi to the list as well as to localstorage
+        if (searchedCitiesArr.includes(searchCity)){
+            $("#citySearch").val("");
+            return;
+        }
+        searchedCitiesArr.push(searchCity);
+        localStorage.setItem("searchedCitiesArr", JSON.stringify(searchedCitiesArr));
+        console.log(searchedCitiesArr.length);
+
         return false;
+
     });
+
+    // function showAllQueries () {
+    //     for(var i=0; i<searchedCitiesArr.length; i++){
+    //         var cityLi= $("#cityList").html("<li class='list-group-item'</li>");
+    //         cityLi.text(searchedCitiesArr[i]);
+    //         cityLi.attr("id", "data-city-"+i);
+
+
+    //     }
+    // }
+
+    // $(".list-group-item").on("click", function(){
+    //     console.log($(".list-group-item").val());
+    // });
+
+
+    // //add that if a button is clicked local storage can be cleared OR if certain max of array is reached it overwrites
+    // function emptyArray(){
+    //     searchedCitiesArr.empty();
+    // }
+
             
-            // 1. Retrieve user input and convert to variables
-            // 2. use those variables to run ajax call to weather APIKey
-            // 3. break down the object into usable fields
-            // 4. Dynamically generate html content
             
             
-            
-            // //GeolocationAPI
+});
+
+ // //GeolocationAPI
             // api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
             
-            
-            
-            
-    });
