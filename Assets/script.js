@@ -247,8 +247,12 @@ $(document).ready(function() {
             var newForecastURL = forecastQueryBaseURL +"?q=" +defaultCity  + "&APPID=" + APIKey;
             console.log(newForecastURL);
             forecastQuery(newForecastURL);
+
+            var latRaleigh =35.78;
+            var longRaleigh =78.63;
             
             forecastDays();
+            uvIndexQuery(latRaleigh, longRaleigh);
                 
             });
                        
