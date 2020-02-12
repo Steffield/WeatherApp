@@ -83,7 +83,7 @@ $(document).ready(function() {
             var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
             //header with Cityname, date and icon
             $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
-            $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+            $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
             $(".humidity").text("Humidity: " + response.main.humidity+"%");
                 
             // Converts the temp from Kelvin to Fahrenheit with the below formula
@@ -135,7 +135,7 @@ $(document).ready(function() {
         $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
                    
         console.log(icon);
-        $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+        $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
         $(".humidity").text("Humidity: " + response.main.humidity+"%");
             
         // Converts the temp from Kelvin to Fahrenheit with the below formula
@@ -220,7 +220,21 @@ $(document).ready(function() {
             })
         .then(function(response){
             
-            $(".UV").text("UV Index: " +response.value);
+            $("#UV").text(response.value);
+            
+            if(response.value>=8){
+                $("#UV").css("background", "red");
+                $("#UV").css("border-radius", "5px");
+            } else if(response.value<8 &&response.value>6){
+                $("#UV").css("background", "orange");
+                $("#UV").css("border-radius", "5px");
+            } else if(response.value<=6 &&response.value>3){
+                $("#UV").css("background", "yellow");
+                $("#UV").css("border-radius", "5px");
+            }else if(response.value<=3){
+                $("#UV").css("background", "green");
+                $("#UV").css("border-radius", "5px");
+            }
           
         }); 
     }
@@ -236,7 +250,7 @@ $(document).ready(function() {
             var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
             //header with Cityname, date and icon
             $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
-            $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+            $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
             $(".humidity").text("Humidity: " + response.main.humidity+"%");
                 
             // Converts the temp from Kelvin to Fahrenheit with the below formula
