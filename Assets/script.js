@@ -80,7 +80,7 @@ $(document).ready(function() {
             console.log(response.name);
             console.log(response.sys.country);
 
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
             //header with Cityname, date and icon
             $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
             $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
@@ -130,7 +130,7 @@ $(document).ready(function() {
         // Transfer content to HTML
 
         // icon variable
-        var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
+        var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
         //header with Cityname, date and icon
         $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
                    
@@ -167,7 +167,7 @@ $(document).ready(function() {
             console.log(response);
             
             //today+1
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[6].weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[6].weather[0].icon + ".png'>");
             var fahrenheit = (response.list[6].main.temp -273.15) *1.8 +32;
             //header with Cityname, date and icon
             $(".icon1").html(icon);
@@ -175,7 +175,7 @@ $(document).ready(function() {
             $(".humid1").text("Humid.: "+ response.list[6].main.humidity +" %");
             
             //today+2
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[14].weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[14].weather[0].icon + ".png'>");
             var fahrenheit = (response.list[14].main.temp -273.15) *1.8 +32;
             //header with Cityname, date and icon
             $(".icon2").html(icon);
@@ -183,7 +183,7 @@ $(document).ready(function() {
             $(".humid2").text("Humid.: "+ response.list[14].main.humidity +" %");
             
             //today+3
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[22].weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[22].weather[0].icon + ".png'>");
             var fahrenheit = (response.list[22].main.temp -273.15) *1.8 +32;
             //header with Cityname, date and icon
             $(".icon3").html(icon);
@@ -191,7 +191,7 @@ $(document).ready(function() {
             $(".humid3").text("Humid.: "+ response.list[22].main.humidity +" %");
 
             //today+4
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[30].weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[30].weather[0].icon + ".png'>");
             var fahrenheit = (response.list[30].main.temp -273.15) *1.8 +32;
             //header with Cityname, date and icon
             $(".icon4").html(icon);
@@ -199,7 +199,7 @@ $(document).ready(function() {
             $(".humid4").text("Humid.: "+ response.list[30].main.humidity +" %");
 
             //today+5
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.list[38].weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.list[38].weather[0].icon + ".png'>");
             var fahrenheit = (response.list[38].main.temp -273.15) *1.8 +32;
             //header with Cityname, date and icon
             $(".icon5").html(icon);
@@ -247,7 +247,7 @@ $(document).ready(function() {
             method: "GET"
             }).then(function(response) {             
            
-            var icon = ("<img src='http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
+            var icon = ("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png'>");
             //header with Cityname, date and icon
             $("#cityName").html("<h2>" + response.name +" ("+ currentDateEl +") "+ icon+"</h2>");
             $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
@@ -316,6 +316,11 @@ $(document).ready(function() {
             $("#citySearch").val("");
             return;
         }
+        //delete oldest query if more tahn seven in storage
+        // if(searchedCitiesArr.length>7){
+        //     searchedCitiesArr.splice(0,1);
+        //     return searchedCitiesArr;
+        // }
 
         searchedCitiesArr.push(searchCity);
         localStorage.setItem("searchedCitiesArr",JSON.stringify(searchedCitiesArr));
