@@ -63,6 +63,7 @@ $(document).ready(function() {
             $("#cityName").show();
             $("#cityName").append($("<p>").html("Location can't be retrieved. Raleigh will be picked as your default location."));
             defaultQuery(defaultURL);
+            
         }
     }
 
@@ -223,16 +224,16 @@ $(document).ready(function() {
             $("#UV").text(response.value);
             
             if(response.value>=8){
-                $("#UV").css("background", "red");
+                $("#UV").css("background", "#df8c97");
                 $("#UV").css("border-radius", "5px");
             } else if(response.value<8 &&response.value>6){
-                $("#UV").css("background", "orange");
+                $("#UV").css("background", "#dfab8c");
                 $("#UV").css("border-radius", "5px");
             } else if(response.value<=6 &&response.value>3){
-                $("#UV").css("background", "yellow");
+                $("#UV").css("background", "#dfd58c");
                 $("#UV").css("border-radius", "5px");
             }else if(response.value<=3){
-                $("#UV").css("background", "green");
+                $("#UV").css("background", "#c0df8c");
                 $("#UV").css("border-radius", "5px");
             }
           
@@ -263,7 +264,7 @@ $(document).ready(function() {
             forecastQuery(newForecastURL);
 
             var latRaleigh =35.78;
-            var longRaleigh =78.63;
+            var longRaleigh =-78.63;
             
             forecastDays();
             uvIndexQuery(latRaleigh, longRaleigh);

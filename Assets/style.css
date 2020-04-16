@@ -1,26 +1,28 @@
 *, *::before, *::after{
     box-sizing: border-box;
     font-family: 'Alatsi', sans-serif;
-    /* background-color: #EEE2DC; */
-    /* background-image: url("./bgWeather.jpg"); */
 
 }
+
 .navbar{
     padding: 15px;
     color:#f5f5f5;
-    box-shadow: 1px 1px 3px 4px #A09AA4;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 
 }
 body{
     background-color: #f5f5f5;
 }
+
 img {
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
 }
+
 button{
-    background-color: #368cbf ;
+    background-color: #8cc0df ;
     margin: 10px;
+    text-align: center
 }
 .card-body{
     font-size: medium;
@@ -44,6 +46,7 @@ h2{
 
 #forecast{
     margin-top:5px;
+    color: black;
 } 
     
 nav{
@@ -68,36 +71,42 @@ h1{
 
 #left-panel{
     background-color:f5f5f5;
-    /* #b2beb5 */
-
     padding: 20px;
 
 }
 
 #upperRightPanel{
-    background-color:#D7DDE0;
+
+    background-color: white;
+    /* color: white; */
         /* #E9DAD6; */
      /* #e2e5de; */
     font-size: 1.2em;
-    box-shadow: 1px 1px 3px 4px #A09AA4;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 
 }
 
 #lowerRightPanel{
-    background-color:#e0e0e0;
-    box-shadow: 1px 1px 3px 4px #A09AA4;
+    background-color:whitesmoke;
+    color: black;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
 
+}
+
+li{
+    background-color: whitesmoke;
+}
+
+#UV{
+    padding: 0 5px 0 5px;
 }
 
 
 .panel{
-    /* border: 1px #33363b solid; */
     text-align: left;
     margin: 15px;
     justify-content: left;
     padding: 10px;
-    border-radius:5px;
-    /* box-shadow: 1px 1px 3px 4px #93747C; */
 
 }
 
@@ -109,24 +118,90 @@ h1{
     font-size: 1.2em;
 }
 
-
-.card{
-    background-color: #368cbf ;;
-    color: #eaeaea;
-}
-
 .card-deck{
     margin:20px 0px 5px 0px;
 }
 
 .btn{
-    background: #368cbf ;
+    background-color: #8cc0df;
+    /* color: white; */
+ 
 }
 
 
 .list-group-item:hover{
-    background-color: #A09AA4;
+    background-color: #8cc0df;
     color: #fff;
+
+}
+
+.icon1,
+.icon2,
+.icon3,
+.icon4,
+.icon5{
+    font-size: 2em
+}
+
+
+@media (max-width: 768px) and (min-width:300px){
+    h2{
+        font-size:44px!important;
+
+    }
+    #searchHeader{
+        font-size: 44px!important;
+
+    }
+    .list-group-item{
+        font-size: 30px!important;
+    }
+    #upperRightPanel{
+        font-size:1.6em!important;
+    }
+    .card{
+        width:100%!important;
+    }
+    h1{
+        font-size: 60px;
+        padding: 30px;
+    }
+
+}
+
+@media (max-width: 414px) and (min-width:300px){
+    h2{
+        font-size:30px!important;
+
+    }
+    #searchHeader{
+        font-size: 30px!important;
+
+    }
+    .list-group-item{
+        font-size: 20px!important;
+    }
+    #upperRightPanel{
+        font-size:1.2em!important;
+    }
+    .card{
+        width:100%!important;
+    }
+    h1{
+        font-size: 40px;
+        padding: 10px;
+    }
+
+    p,
+    .card-title,
+    {
+        font-size: 3em;
+    }
+
+    nav{
+        margin-bottom: 0;
+        width:100%
+    }
 
 }
 
